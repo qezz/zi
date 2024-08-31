@@ -38,7 +38,7 @@ pub enum Key {
     /// Normal character.
     Char(char),
     /// Alt modified character.
-    Alt(char),
+    Alt(ExtraKey),
     /// Ctrl modified character.
     ///
     /// Note that certain keys may not be modifiable with `ctrl`, due to limitations of terminals.
@@ -47,4 +47,10 @@ pub enum Key {
     Null,
     /// Esc key.
     Esc,
+}
+
+#[derive(Debug, Clone, Copy, PartialOrd, PartialEq, Eq, Hash)]
+pub enum ExtraKey {
+    Backspace,
+    Char(char),
 }

@@ -2,8 +2,8 @@ use std::{cmp, iter};
 
 use super::text::{Text, TextProperties};
 use crate::{
-    Bindings, Callback, Component, ComponentExt, ComponentLink, FlexDirection, Item, Key, Layout,
-    Rect, ShouldRender, Style,
+    terminal::input::ExtraKey, Bindings, Callback, Component, ComponentExt, ComponentLink,
+    FlexDirection, Item, Key, Layout, Rect, ShouldRender, Style,
 };
 
 #[derive(Clone, PartialEq)]
@@ -139,11 +139,17 @@ impl Component for Select {
         bindings.add("next-item", [Key::Down], || Message::NextItem);
         bindings.add("previous-item", [Key::Ctrl('p')], || Message::PreviousItem);
         bindings.add("previous-item", [Key::Up], || Message::PreviousItem);
-        bindings.add("first-item", [Key::Alt('<')], || Message::FirstItem);
-        bindings.add("last-item", [Key::Alt('>')], || Message::LastItem);
+        bindings.add("first-item", [Key::Alt(ExtraKey::Char('<'))], || {
+            Message::FirstItem
+        });
+        bindings.add("last-item", [Key::Alt(ExtraKey::Char('>'))], || {
+            Message::LastItem
+        });
         bindings.add("next-page", [Key::Ctrl('v')], || Message::NextPage);
         bindings.add("next-page", [Key::PageDown], || Message::NextPage);
-        bindings.add("previous-page", [Key::Alt('v')], || Message::PreviousPage);
+        bindings.add("previous-page", [Key::Alt(ExtraKey::Char('v'))], || {
+            Message::PreviousPage
+        });
         bindings.add("previous-page", [Key::PageUp], || Message::PreviousPage);
     }
 }

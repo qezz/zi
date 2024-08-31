@@ -25,7 +25,7 @@ use self::{
 };
 use zi::{
     app::{App, ComponentMessage, MessageSender},
-    terminal::{Canvas, Colour, Key, Size, Style},
+    terminal::{Canvas, Colour, ExtraKey, Key, Size, Style},
     Layout,
 };
 
@@ -404,6 +404,7 @@ fn new_event_stream() -> EventStream {
 fn map_key(key: crossterm::event::KeyEvent) -> Key {
     use crossterm::event::{KeyCode, KeyModifiers};
     match key.code {
+        KeyCode::Backspace if key.modifiers.contains(KeyModifiers::ALT) => Key::Alt(ExtraKey::Backspace),
         KeyCode::Backspace => Key::Backspace,
         KeyCode::Left => Key::Left,
         KeyCode::Right => Key::Right,
@@ -420,7 +421,7 @@ fn map_key(key: crossterm::event::KeyEvent) -> Key {
         KeyCode::Null => Key::Null,
         KeyCode::Esc => Key::Esc,
         KeyCode::Char(char) if key.modifiers.contains(KeyModifiers::CONTROL) => Key::Ctrl(char),
-        KeyCode::Char(char) if key.modifiers.contains(KeyModifiers::ALT) => Key::Alt(char),
+        KeyCode::Char(char) if key.modifiers.contains(KeyModifiers::ALT) => Key::Alt(ExtraKey::Char(char)),
         KeyCode::Char(char) => Key::Char(char),
         KeyCode::Enter => Key::Char('\n'),
         KeyCode::Tab => Key::Char('\t'),

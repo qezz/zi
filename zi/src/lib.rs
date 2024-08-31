@@ -150,7 +150,9 @@ pub use component::{
     layout::{self, ComponentExt, ComponentKey, Container, FlexBasis, FlexDirection, Item},
     Callback, Component, ComponentLink, Layout, ShouldRender,
 };
-pub use terminal::{Background, Canvas, Colour, Foreground, Key, Position, Rect, Size, Style};
+pub use terminal::{
+    Background, Canvas, Colour, ExtraKey, Foreground, Key, Position, Rect, Size, Style,
+};
 
 pub mod prelude {
     //! The Zi prelude.
@@ -158,7 +160,9 @@ pub mod prelude {
         AnyCharacter, Bindings, Component, ComponentExt, ComponentLink, Container, FlexBasis,
         FlexDirection, Item, Layout, ShouldRender,
     };
-    pub use super::{Background, Canvas, Colour, Foreground, Key, Position, Rect, Size, Style};
+    pub use super::{
+        Background, Canvas, Colour, ExtraKey, Foreground, Key, Position, Rect, Size, Style,
+    };
 }
 
 // Re-export 3rd party libraries to do with unicode segmentation.

@@ -603,7 +603,7 @@ impl std::fmt::Display for InputController {
                 Key::Char('\t') => write!(formatter, "TAB ")?,
                 Key::Char(char) => write!(formatter, "{} ", char)?,
                 Key::Ctrl(char) => write!(formatter, "C-{} ", char)?,
-                Key::Alt(char) => write!(formatter, "A-{} ", char)?,
+                Key::Alt(extra_key) => write!(formatter, "A-{:?} ", extra_key)?,
                 Key::F(number) => write!(formatter, "F{} ", number)?,
                 Key::Esc => write!(formatter, "ESC ")?,
                 key => write!(formatter, "{:?} ", key)?,
